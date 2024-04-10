@@ -40,6 +40,7 @@ jobs:
       RUST_BACKTRACE: 1
       CARGO_INCREMENTAL: 0
       LLVM_CONFIG_PATH: /usr/local/opt/llvm/bin/llvm-config
+      ANDROID_HOME: /usr/local/lib/android/sdk
       NDK_HOME: /usr/local/lib/android/sdk/ndk-bundle
 
     runs-on: ${{ matrix.platform.host }}
@@ -74,6 +75,12 @@ jobs:
     - name: Install cargo-apk
       if: contains(matrix.platform.target, 'android')
       run: cargo install cargo-apk
+
+    - name: Install Android SDK Platform 30
+      if: contains(matrix.platform.target, 'android')
+      run: |
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-30"
+        $ANDROID_HOME/tools/bin/sdkmanager --list
 
     - name: Build
       if: contains(matrix.platform.target, 'android') == false
