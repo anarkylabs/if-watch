@@ -76,11 +76,11 @@ jobs:
       if: contains(matrix.platform.target, 'android')
       run: cargo install cargo-apk
 
-    - name: Install Android SDK Platform 30
-      if: contains(matrix.platform.target, 'android')
-      run: |
-        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-30"
-        $ANDROID_HOME/tools/bin/sdkmanager --list
+#    - name: Install Android SDK Platform 30
+#      if: contains(matrix.platform.target, 'android')
+#      run: |
+#        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-30"
+#        $ANDROID_HOME/tools/bin/sdkmanager --list
 
     - name: Build
       if: contains(matrix.platform.target, 'android') == false
